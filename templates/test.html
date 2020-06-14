@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口测试</title>
+</head>
+<body>
+<form action="/add/" method="get">
+
+    <h3>慢半拍</h3>
+    接口地址:<input type="text" name="url" id="url"><br>
+    <p>测试数据</p>
+    a:<input type="text" name="a" id="a"><br>
+    b:<input type="text" name="b" id="b"><br>
+    预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
+    <p>实际结果:<span id="actual_result"></span></p>
+    <p>测试结果:<span id="test_result"></span></p>
+    <button type="button" id="sum">执行测试</button>
+</form>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#sum").click(function () {
+            var a = $('#a').val();
+            var b = $('#b').val();
+            var url = $('#url').val();
+            var expect_reusult = $('#expect_reusult').val();
+
+            $.get("/add/", {'a': a, 'b': b}, function (ret) {
+                $("#actual_result").html(ret)
+
+                if (expect_reusult == ret){
+                    $("#test_result").html('pass')
+                }
+                else {
+                    $("#test_result").html('fail')
+                }
+
+            })
+        });
+    });
+</script>
+</body>
+</html>

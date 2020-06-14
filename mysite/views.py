@@ -3,26 +3,16 @@ from django.shortcuts import render
 import method
 import json
 
-
-def hello(request):
-	return HttpResponse("Hello SML ! ")
-
-
 def runoob(request):
 	context = {}
 	context['hello'] = 'Hello!'
 	return render(request, 'runoob.html', context)
 
 
-def index1(request):
-	views_name = "这么久没见"
-	return render(request, "index.html", {"name": views_name})
-
-
 def index(request):
 	pt = method.cls_api()
 	exr = request.POST.get('exr', None)
-	title = "慢半拍"
+	title = "这么久没见"
 	data = ""
 	data1 = ""
 	if request.method == 'POST':
@@ -35,12 +25,10 @@ def index(request):
 			data = 'fail'
 	return render(request,"index.html",{"data": data, "data1": data1, "title": title})
 
-
 def add_args(a, b):
 	x = int(a)
 	y = int(b)
 	return x + y
-
 
 def post(request):
 	if request.method == 'POST':
@@ -59,3 +47,13 @@ def post(request):
 			return HttpResponse(u'输入为空')
 	else:
 		return HttpResponse(u'方法错误')
+
+def test(request):
+    return render(request, 'test.html')
+
+
+def add(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    c = int(a)+int(b)
+    return HttpResponse(str(c))
