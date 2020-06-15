@@ -23,5 +23,5 @@ urlpatterns = [
     url('index/',views.index),
     url('add1/',views.post),
     path('test/', views.test),
-    path('add/', views.add),
+    path('add/', views.post),
 ]

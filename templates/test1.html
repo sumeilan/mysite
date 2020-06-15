@@ -7,7 +7,7 @@
 <body>
 <form action="/add/" method="get">
 
-    <h3>test</h3>
+    <h3>test1</h3>
     接口地址:<input type="text" name="url" id="url"><br>
     <p>测试数据</p>
     a:<input type="text" name="a" id="a"><br>
@@ -27,19 +27,24 @@
             var url = $('#url').val();
             var expect_reusult = $('#expect_reusult').val();
 
-            $.get("/add/", {'a': a, 'b': b}, function (ret) {
-                $("#actual_result").html(ret)
+            $.ajax({
+                url: "/add/",
+                type: 'POST',     // 请求类型，常用的有 GET 和 POST
+                data: {'a': a, 'b': b},
+                success: function(data) { // 接口调用成功回调函数
+                    $("#actual_result").html(data)
 
-                if (expect_reusult == ret){
-                    $("#test_result").html('pass')
+                    if (expect_reusult == data){
+                        $("#test_result").html('pass')
+                    }
+                    else {
+                        $("#test_result").html('fail')
+                     }
                 }
-                else {
-                    $("#test_result").html('fail')
-                }
-
-            })
+            });
         });
     });
+
 </script>
 </body>
 </html>
