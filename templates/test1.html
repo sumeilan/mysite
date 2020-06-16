@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>接口测试</title>
+    <title>test1</title>
 </head>
 <body>
-<form action="/add/" method="get">
+<form action="/testp/" method="post">
 
-    <h3>test1</h3>
+    <h3>test111</h3>
     接口地址:<input type="text" name="url" id="url"><br>
-    <p>测试数据</p>
-    a:<input type="text" name="a" id="a"><br>
-    b:<input type="text" name="b" id="b"><br>
+    参数:<input type="text" name="body" id="body"><br>
     预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
     <p>实际结果:<span id="actual_result"></span></p>
     <p>测试结果:<span id="test_result"></span></p>
@@ -22,15 +20,14 @@
 <script>
     $(document).ready(function () {
         $("#sum").click(function () {
-            var a = $('#a').val();
-            var b = $('#b').val();
+            var body = $('#body').val();
             var url = $('#url').val();
             var expect_reusult = $('#expect_reusult').val();
 
             $.ajax({
-                url: "/add/",
+                url: "/testp/",
                 type: 'POST',     // 请求类型，常用的有 GET 和 POST
-                data: {'a': a, 'b': b},
+                data: {'url':url,'body': body},
                 success: function(data) { // 接口调用成功回调函数
                     $("#actual_result").html(data)
 
