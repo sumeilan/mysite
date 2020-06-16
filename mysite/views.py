@@ -26,12 +26,12 @@ def add_args(a, b):
     y = int(b)
     return x + y
 
-def send_url(url):
-    url = 'http://lemondream.chumanapp.com/api/sample/test_sendcode?mobile=88850769071'
-    params = {'a': 'a', 'b': 'b'}
-    headers ={'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044'}
-    response = requests.post(url,  headers=headers, verify=False)
-    return HttpResponse(response.text)
+def send_url(url,body):
+    url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
+    body = body
+    headers ={'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}
+    response = requests.post(url, body,headers=headers, verify=False)
+    return HttpResponse(response)
 
 
 def testp(request):
@@ -39,7 +39,7 @@ def testp(request):
         if request.POST:
             body = request.POST.get('body', None)
             url = request.POST.get('url', None)
-            res = send_url(url)
+            res = send_url(url,body)
             return HttpResponse(res)
         else:
             return HttpResponse(u'输入为空')

@@ -8,7 +8,7 @@
 <form action="/testp/" method="post">
 
     <h3>test111</h3>
-    接口地址:<input type="text" name="url" id="url"><br>
+    地址:<input type="text" name="url" id="url" style="width:600px"><br>
     参数:<input type="text" name="body" id="body"><br>
     预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
     <p>实际结果:<span id="actual_result"></span></p>
@@ -29,9 +29,11 @@
                 type: 'POST',     // 请求类型，常用的有 GET 和 POST
                 data: {'url':url,'body': body},
                 success: function(data) { // 接口调用成功回调函数
+                     console.log("测试:"+typeof(data));
+                     console.log(data.search("请求成功") != -1 );  // true
                     $("#actual_result").html(data)
 
-                    if (expect_reusult == data){
+                    if (data.search("请求成功") != -1 ){
                         $("#test_result").html('pass')
                     }
                     else {
