@@ -28,10 +28,10 @@ def add_args(a, b):
 
 def send_url(url,body):
     url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
-    body = body
+    body = '{"type":"4"}'
     headers ={'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}
     response = requests.post(url, body,headers=headers, verify=False)
-    return HttpResponse(response)
+    return HttpResponse(response,content_type="application/json")
 
 
 def testp(request):
