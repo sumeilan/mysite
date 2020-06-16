@@ -31,8 +31,8 @@
                 dataType:"json",
                 success: function(data) { // 接口调用成功回调函数
                     jd = JSON.stringify(data)
-                    console.log("测试:"+jd);
-                    console.log("data:"+data);
+                    console.log("测试:",jd);
+                    console.log("data:",data);
                     console.log("code:",data.data);
 
                     $("#actual_result").html(JSON.stringify(data.data))
