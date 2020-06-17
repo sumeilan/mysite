@@ -7,12 +7,13 @@
 <body>
 <div>
     <form action="/testp/" method="post">
-        <h3>test</h3>
+        <h3>test1</h3>
         测试环境：<label><input name="env" type="radio" value="demo" checked/>demo</label>
         <label><input name="env" type="radio" value="api2"/>api2</label>
         <label><input name="env" type="radio" value="api"/>api</label><br>
-        path:<input type="text" name="path" id="path" style="width:600px" value="/api/banner/get_banner_list"><br>
-        header:<input type="text" name="header" id="header" style="width:600px" value="{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"><br>
+        path:<input type="text" name="path" id="path" value="/api/banner/get_banner_list"><br>
+        header:<input type="text" name="header1" id="header" style="width:800px"
+                      value="{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"><br>
         body:<input type="text" name="body" id="body" value='{"type":"4"}'><br>
         预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
         <p>实际结果:<span id="actual_result"></span></p>

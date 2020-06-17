@@ -46,7 +46,6 @@ def testp(request):
         if request.POST:
             env = request.POST.get('env', None)
             path = request.POST.get('path', None)
-            # path = '/api/banner/get_banner_list'
             header = request.POST.get('header', None)
             body = request.POST.get('body', None)
             res = send_url(env,path,header,body)
