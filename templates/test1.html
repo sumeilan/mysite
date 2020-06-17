@@ -5,40 +5,58 @@
     <title>test1</title>
 </head>
 <body>
-<form action="/testp/" method="post">
+<div>
+    <form action="/testp/" method="post">
+        <h3>test</h3>
+        测试环境：<label><input name="env" type="radio" value="demo" checked/>demo</label>
+        <label><input name="env" type="radio" value="api2"/>api2</label>
+        <label><input name="env" type="radio" value="api"/>api</label><br>
+        path:<input type="text" name="path" id="path" style="width:600px" value="/api/banner/get_banner_list"><br>
+        header:<input type="text" name="header" id="header" style="width:600px" value="{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"><br>
+        body:<input type="text" name="body" id="body" value='{"type":"4"}'><br>
+        预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
+        <p>实际结果:<span id="actual_result"></span></p>
+        <p>测试结果:<span id="test_result"></span></p>
+        <button type="button" id="sum">执行测试</button>
+        <br><br>
+        <button type="button" id="save" style="display:none">点击可保存用例</button>
+    </form>
+</div>
 
-    <h3>test</h3>
-    地址:<input type="text" name="url" id="url" style="width:600px"><br>
-    参数:<input type="text" name="body" id="body"><br>
-    预期结果:<input type="text" name="expect_reusult" id="expect_reusult"><br>
-    <p>实际结果:<span id="actual_result"></span></p>
-    <p>测试结果:<span id="test_result"></span></p>
-    <button type="button" id="sum">执行测试</button>
-</form>
 
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#sum").click(function () {
+            var env =  $("input[name='env']:checked").val();
+            var path = $('#path').val();
+            var header = $('#header').val();
             var body = $('#body').val();
-            var url = $('#url').val();
             var expect_reusult = $('#expect_reusult').val();
+            console.log("header:",header);
+            console.log("header:",typeof(header));
 
+            if (path){
             $.ajax({
                 url: "/testp/",
                 type: 'POST',     // 请求类型，常用的有 GET 和 POST
-                data: {'url':url,'body': body},
+                data: {'env':env,'path':path,'header':header,'body': body},
                 dataType:"json",
                 success: function(data) { // 接口调用成功回调函数
-                    jd = JSON.stringify(data)
-                    console.log("测试:",jd);
-                    console.log("data:",data);
-                    console.log("code:",data.data);
+                    <!--console.log("data-list:",JSON.stringify(dlist));-->
+                    $("#actual_result").html(JSON.stringify(data))
 
-                    $("#actual_result").html(JSON.stringify(data.data))
+                    if (data.msg == '请求成功'){
+                        if (JSON.stringify(data.data).search(expect_reusult) != -1){
+                            $("#test_result").html('pass')
+                            document.getElementById('test_result').style.color='green'
+                            document.getElementById('save').style.display = 'block'
 
-                    if (data){
-                        $("#test_result").html('pass')
+                        }
+                        else{
+                            $("#test_result").html('fail')
+                            document.getElementById('test_result').style.color='red'
+                        }
 
                     }
                     else {
@@ -46,8 +64,14 @@
                      }
                 }
             });
+            }
+            else{
+                alert('path不能为空')
+
+            }
         });
     });
+
 
 </script>
 </body>

@@ -24,4 +24,5 @@ urlpatterns = [
     url('add/',views.post),
     path('test/', views.test),
     path('testp/', views.testp),
+    path('layui/', views.layuipage),
 ]

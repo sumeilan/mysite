@@ -26,10 +26,17 @@ def add_args(a, b):
     y = int(b)
     return x + y
 
-def send_url(url,body):
-    url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
-    body = '{"type":"4"}'
-    headers ={'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}
+def send_url(env,path,header,body):
+    # url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
+    if env == 'demo':
+        url = 'http://lemondream.chumanapp.com' + path
+    elif env =='api2':
+        url = 'http://api-api2.lemondream.cn' + path
+    else:
+        url = 'http://api.lemondream.cn' + path
+
+    body = body
+    headers = eval(header)
     response = requests.post(url, body,headers=headers, verify=False)
     return HttpResponse(response,content_type="application/json")
 
@@ -37,9 +44,12 @@ def send_url(url,body):
 def testp(request):
     if request.method == 'POST':
         if request.POST:
+            env = request.POST.get('env', None)
+            path = request.POST.get('path', None)
+            # path = '/api/banner/get_banner_list'
+            header = request.POST.get('header', None)
             body = request.POST.get('body', None)
-            url = request.POST.get('url', None)
-            res = send_url(url,body)
+            res = send_url(env,path,header,body)
             return HttpResponse(res)
         else:
             return HttpResponse(u'输入为空')
@@ -52,8 +62,8 @@ def testp(request):
 def test(request):
     return render(request, 'test1.html')
 
-def testcase(request):
-    return render(request, 'testcase.html')
+def layuipage(request):
+    return render(request, 'layuipage.html')
 
 def post(request):
     if request.method=='POST':
@@ -74,18 +84,4 @@ def post(request):
         return HttpResponse(u'方法错误')
 
 
-def testcasepP(request):
-    pt = method.cls_api()
-    expect_reusult = request.POST.get('expect_reusult', None)
-    data = ""
-    data1 = ""
-    if request.method == 'POST':
-        data = pt.post(request.POST.get('url', None), json.loads(request.POST.get('testdate', None)))
-        result = data.json()
-        data1 = result['message']
-        if int(result['message'] == int(expect_reusult)):
-            data = 'pass'
-        else:
-            data = 'fail'
-    return HttpResponse(data)
 
