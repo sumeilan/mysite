@@ -19,10 +19,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    url('index/',views.index),
     url('add/',views.post),
+    path('index/',views.index),
     path('test/', views.test),
     path('testp/', views.testp),
-    path('layui/', views.layuipage),
+    path('testapi/', views.testapi),
 ]
