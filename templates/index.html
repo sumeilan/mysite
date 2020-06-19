@@ -74,7 +74,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">测试环境</label>
                 <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao">
+                    <select name="env" lay-filter="aihao">
                         <option value="demo" checked="">demo</option>
                         <option value="api2">api2</option>
                         <option value="api">api</option>
@@ -85,7 +85,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">path</label>
                 <div class="layui-input-block">
-                    <input type="password" name="password" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input name="path" placeholder="请输入" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
@@ -99,7 +99,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">body</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="desc"></textarea>
+                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="body"></textarea>
                 </div>
             </div>
 
@@ -173,13 +173,9 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   //表单赋值
   layui.$('#LAY-component-form-setval').on('click', function(){
     form.val('example', {
-      "username": "贤心" // "name": "value"
-      ,"password": "123456"
-      ,"interest": 1
-      ,"like[write]": true //复选框选中状态
-      ,"close": true //开关状态
-      ,"sex": "女"
-      ,"desc": "我爱 layui"
+      "path": "path" // "name": "value"
+      ,"header": "header"
+      ,"body":"bdoy"
     });
   });
 
