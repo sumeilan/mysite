@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import method, requests
-import json
+import json,time,os
 
 
 def testapi(request):
@@ -84,3 +84,12 @@ def test(request):
 
 def index(request):
     return render(request, 'index.html')
+
+def lemon(request):
+    return render(request, 'lemon.html')
+
+def connect_adb(a):
+    # swipe = "adb shell input swipe 500 1000 500 10"
+    swipe = "adb devices"
+    re = os.popen(swipe)
+    return re

@@ -63,7 +63,8 @@
                 <li class="layui-nav-item"><a href="">ABtest</a></li>
                 <li class="layui-nav-item"><a href="">monkey runner</a></li>
                 <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
-                <li class="layui-nav-item"><a href="">柠檬精小脚本</a></li>
+                <li class="layui-nav-item"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
+
             </ul>
         </div>
     </div>
@@ -153,16 +154,6 @@
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
 
         //自定义验证规则
         form.verify({
@@ -178,14 +169,6 @@
             , content: function (value) {
                 layedit.sync(editIndex);
             }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
         });
 
         //监听提交
