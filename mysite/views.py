@@ -54,8 +54,9 @@ def testp(request):
         else:
             return HttpResponse(u'输入为空')
     else:
-        a = request.GET['a']
-        res = send_url(a)
+        a=1
+        b=2
+        res = add_args(a,b)
         return HttpResponse(res)
 
 
@@ -88,8 +89,8 @@ def index(request):
 def lemon(request):
     return render(request, 'lemon.html')
 
-def connect_adb(a):
+def connect_adb(request):
     # swipe = "adb shell input swipe 500 1000 500 10"
     swipe = "adb devices"
     re = os.popen(swipe)
-    return re
+    return HttpResponse(re)

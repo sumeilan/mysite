@@ -76,7 +76,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">设备信息</label>
                 <div class="layui-input-block">
-                    <input type="text" name="device" lay-verify="title" placeholder="设备信息" class="layui-input">
+                    <input type="text" name="device" id="device" lay-verify="title" placeholder="设备信息"
+                           class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -138,7 +139,16 @@
 
         //表单赋值
         layui.$('#LAY-component-form-setval').on('click', function () {
-            location.href = "/connect_adb/"
+            {#location.href = "/connect_adb/"#}
+            $.ajax({
+                url: "/connect_adb/",
+                success: function (data) {
+                    form.val('example', {
+                        "device": data // "name": "value"
+                    });
+                }
+            });
+
         });
     });
 
