@@ -20,11 +20,11 @@ from . import views
 
 urlpatterns = [
     url('add/',views.post),
-    path('index/',views.index),
+    path('index/',views.index, name='index'),
     path('test/', views.test,name='test'),
     path('testp/', views.testp),
     path('testapi/', views.testapi),
     path('lemon/', views.lemon,name='lemon'),
-path('connect_adb/', views.connect_adb),
-
+    path('testcase/', views.testcase,name='testcase'),
+    path('connect_adb/', views.connect_adb),
 ]

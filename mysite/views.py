@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import method, requests
-import json,time,os
+import json, time, os
 
 
 def testapi(request):
@@ -54,9 +54,9 @@ def testp(request):
         else:
             return HttpResponse(u'输入为空')
     else:
-        a=1
-        b=2
-        res = add_args(a,b)
+        a = 1
+        b = 2
+        res = add_args(a, b)
         return HttpResponse(res)
 
 
@@ -86,8 +86,14 @@ def test(request):
 def index(request):
     return render(request, 'index.html')
 
+
+def testcase(request):
+    return render(request,'testcase.html')
+
+
 def lemon(request):
     return render(request, 'lemon.html')
+
 
 def connect_adb(request):
     # swipe = "adb shell input swipe 500 1000 500 10"

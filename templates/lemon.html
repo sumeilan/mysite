@@ -1,11 +1,13 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>lemon</title>
     <link rel="stylesheet" href="{% static '/css/layui.css' %}">
+    <!--<link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/css/layui.css">-->
+
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -44,6 +46,7 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-this"><a href="{% url 'index' %}">主页</a></li>
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">接口调试</a>
                     <dl class="layui-nav-child">
@@ -62,6 +65,7 @@
                 <li class="layui-nav-item"><a href="">ABtest</a></li>
                 <li class="layui-nav-item"><a href="">monkey runner</a></li>
                 <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
+                <li class="layui-nav-item"><a href="{% url 'testcase' %}">接口调试</a></li>
                 <li class="layui-nav-item layui-this"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
 
             </ul>
@@ -83,15 +87,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">浏览内容</label>
                 <div class="layui-input-inline">
-                    <select name="quiz1">
+                    <select name="way">
                         <option value="">请选择浏览方式</option>
-                        <option value="浙江" selected="">上滑</option>
+                        <option value="上滑" selected="">上滑</option>
                         <option value="左滑喜欢">左滑喜欢</option>
                         <option value="右滑不喜欢">右滑不喜欢</option>
                     </select>
                 </div>
                 <div class="layui-input-inline">
-                    <select name="quiz2">
+                    <select name="nums">
                         <option value="">请选择次数</option>
                         <option value="1">1</option>
                         <option value="5">5</option>
@@ -120,7 +124,6 @@
 </div>
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src='{% static "layui.all.js" %}' charset="utf-8"></script>
-{#<script src="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/layui.js" charset="utf-8"></script>#}
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -131,15 +134,12 @@
 
         //监听提交
         form.on('submit(demo2)', function (data) {
-            {#datas = JSON.stringify(data.field)#}
-            {#layer.alert(JSON.stringify(data.field.header))#}
-            var expect_result = $('#expect_result').val();
+            layer.alert(JSON.stringify(data.field));
             return false;
         });
 
         //表单赋值
         layui.$('#LAY-component-form-setval').on('click', function () {
-            {#location.href = "/connect_adb/"#}
             $.ajax({
                 url: "/connect_adb/",
                 success: function (data) {
@@ -151,6 +151,9 @@
 
         });
     });
+
+
+
 
 </script>
 </body>

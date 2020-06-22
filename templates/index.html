@@ -1,11 +1,10 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>后台-layui</title>
-    {#    <link rel="stylesheet" href="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/css/layui.css">#}
     <link rel="stylesheet" href="{% static '/css/layui.css' %}">
 </head>
 <body class="layui-layout-body">
@@ -14,9 +13,9 @@
         <div class="layui-logo">Sugelan</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item"><a href="">其实</a></li>
+            <li class="layui-nav-item"><a href="">刚刚好</a></li>
+            <li class="layui-nav-item"><a href="">意外</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
@@ -43,10 +42,12 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
+
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">接口调试</a>
+                <li class="layui-nav-item layui-this"><a href="{% url 'index' %}">主页</a></li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">接口</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">执行接口测试</a></dd>
                         <dd><a href="">查看之前的测试记录</a></dd>
@@ -63,6 +64,7 @@
                 <li class="layui-nav-item"><a href="">ABtest</a></li>
                 <li class="layui-nav-item"><a href="">monkey runner</a></li>
                 <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
+                <li class="layui-nav-item"><a href="{% url 'testcase' %}">接口调试</a></li>
                 <li class="layui-nav-item"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
 
             </ul>
@@ -70,72 +72,195 @@
     </div>
 
     <div class="layui-body">
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top:20px;">
-            <legend>接口调试</legend>
-        </fieldset>
+        <div class="layui-body" id="LAY_app_body">
+            <div class="layadmin-tabsbody-item layui-show">
+                <div class="layui-fluid">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md8">
+                            <div class="layui-row layui-col-space15">
+                                <div class="layui-col-md6">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">小工具</div>
+                                        <div class="layui-card-body">
+                                            <div class="layui-carousel layadmin-carousel layadmin-shortcut" lay-anim=""
+                                                 lay-indicator="inside" lay-arrow="none"
+                                                 style="width: 100%; height: 280px;">
+                                                <div carousel-item="">
+                                                    <ul class="layui-row layui-col-space10 layui-this">
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="home/homepage1">
+                                                                <i class="layui-icon layui-icon-console"></i>
+                                                                <cite>主页一</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="home/homepage2">
+                                                                <i class="layui-icon layui-icon-chart"></i>
+                                                                <cite>主页二</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="component/layer/list">
+                                                                <i class="layui-icon layui-icon-template-1"></i>
+                                                                <cite>弹层</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="/senior/im/">
+                                                                <i class="layui-icon layui-icon-chat"></i>
+                                                                <cite>聊天</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="component/progress/index">
+                                                                <i class="layui-icon layui-icon-find-fill"></i>
+                                                                <cite>进度条</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="app/workorder/list">
+                                                                <i class="layui-icon layui-icon-survey"></i>
+                                                                <cite>工单</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="user/user/list">
+                                                                <i class="layui-icon layui-icon-user"></i>
+                                                                <cite>用户</cite>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs3">
+                                                            <a lay-href="set/system/website">
+                                                                <i class="layui-icon layui-icon-set"></i>
+                                                                <cite>设置</cite>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
 
-        <form class="layui-form" action="" lay-filter="example">
-            <div class="layui-form-item">
-                <label class="layui-form-label">测试环境</label>
-                <div class="layui-input-block">
-                    <select name="env" lay-filter="aihao">
-                        <option value="demo" checked="">demo</option>
-                        <option value="api2">api2</option>
-                        <option value="api">api</option>
-                    </select>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="sub">
+                                                </button>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="add">
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md6">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">待办事项</div>
+                                        <div class="layui-card-body">
+
+                                            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim=""
+                                                 lay-indicator="inside" lay-arrow="none"
+                                                 style="width: 100%; height: 280px;">
+                                                <div carousel-item="">
+                                                    <ul class="layui-row layui-col-space10 layui-this">
+                                                        <li class="layui-col-xs6">
+                                                            <a lay-href="app/content/comment"
+                                                               class="layadmin-backlog-body">
+                                                                <h3>待审评论</h3>
+                                                                <p><cite>66</cite></p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs6">
+                                                            <a lay-href="app/forum/list" class="layadmin-backlog-body">
+                                                                <h3>待审帖子</h3>
+                                                                <p><cite>12</cite></p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs6">
+                                                            <a lay-href="template/goodslist"
+                                                               class="layadmin-backlog-body">
+                                                                <h3>待审商品</h3>
+                                                                <p><cite>99</cite></p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="layui-col-xs6">
+                                                            <a href="javascript:;"
+                                                               onclick="layer.tips('不跳转', this, {tips: 3});"
+                                                               class="layadmin-backlog-body">
+                                                                <h3>待发货</h3>
+                                                                <p><cite>20</cite></p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="layui-row layui-col-space10">
+                                                        <li class="layui-col-xs6">
+                                                            <a href="javascript:;" class="layadmin-backlog-body">
+                                                                <h3>待审友情链接</h3>
+                                                                <p><cite style="color: #FF5722;">5</cite></p>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="layui-carousel-ind">
+                                                    <ul>
+                                                        <li class="layui-this"></li>
+                                                        <li></li>
+                                                    </ul>
+                                                </div>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="sub">
+                                                </button>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="add">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">数据概览</div>
+                                        <div class="layui-card-body">
+
+                                            <div class="layui-carousel layadmin-carousel layadmin-dataview"
+                                                 data-anim="fade" lay-filter="LAY-index-dataview" lay-anim="fade"
+                                                 lay-indicator="inside" lay-arrow="none"
+                                                 style="width: 100%; height: 280px;">
+                                                <div carousel-item="" id="LAY-index-dataview">
+                                                    <div class="layui-this" _echarts_instance_="1592806798790"
+                                                         style="-webkit-tap-highlight-color: transparent; user-select: none; cursor: default; background-color: rgba(0, 0, 0, 0);">
+                                                        <div style="position: relative; overflow: hidden; width: 518px; height: 332px;">
+                                                            <div data-zr-dom-id="bg" class="zr-element"
+                                                                 style="position: absolute; left: 0px; top: 0px; width: 518px; height: 332px; user-select: none;"></div>
+                                                            <canvas width="518" height="332" data-zr-dom-id="0"
+                                                                    class="zr-element"
+                                                                    style="position: absolute; left: 0px; top: 0px; width: 518px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                            <canvas width="518" height="332" data-zr-dom-id="1"
+                                                                    class="zr-element"
+                                                                    style="position: absolute; left: 0px; top: 0px; width: 518px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                            <canvas width="518" height="332"
+                                                                    data-zr-dom-id="_zrender_hover_" class="zr-element"
+                                                                    style="position: absolute; left: 0px; top: 0px; width: 518px; height: 332px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                                <div class="layui-carousel-ind">
+                                                    <ul>
+                                                        <li class="layui-this"></li>
+                                                        <li></li>
+                                                        <li></li>
+                                                    </ul>
+                                                </div>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="sub">
+                                                </button>
+                                                <button class="layui-icon layui-carousel-arrow" lay-type="add">
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">path</label>
-                <div class="layui-input-block">
-                    <input name="path" placeholder="请输入" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">header</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="header" value="header"></textarea>
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">body</label>
-                <div class="layui-input-block">
-                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="body"></textarea>
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">期望结果</label>
-                <div class="layui-input-block">
-                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="expect_result" id="expect_result"></textarea>
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">实际结果</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea" id="actual_result"></textarea>
-                </div>
-            </div>
-
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">测试结果</label>
-                <div class="layui-input-block">
-                    <textarea class="layui-textarea" id="test_result"></textarea>
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
-                    {#                    <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>#}
-                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">执行测试</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 
     <div class="layui-footer">
@@ -145,8 +270,7 @@
 </div>
 <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src='{% static "layui.all.js" %}' charset="utf-8"></script>
-{#<script src="https://heerey525.github.io/layui-v2.4.3/layui-v2.4.5/layui.js" charset="utf-8"></script>#}
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
@@ -220,10 +344,14 @@
         //表单取值
         layui.$('#LAY-component-form-getval').on('click', function () {
             var data = form.val('example');
-            layui.alert(JSON.stringify(data));
+            layer.alert(JSON.stringify(data));
         });
 
     });
+
+
+
+
 
 </script>
 </body>
