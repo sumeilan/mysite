@@ -1,7 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views import View
 import method, requests
 import json, time, os
+
+
+class Page(View):
+    page = "index.html"
+    def get(self,request):
+        return render(request, self.page)
 
 
 def testapi(request):
@@ -77,22 +84,6 @@ def post(request):
             return HttpResponse(u'输入为空')
     else:
         return HttpResponse(u'方法错误')
-
-
-def test(request):
-    return render(request, 'test1.html')
-
-
-def index(request):
-    return render(request, 'index.html')
-
-
-def testcase(request):
-    return render(request,'testcase.html')
-
-
-def lemon(request):
-    return render(request, 'lemon.html')
 
 
 def connect_adb(request):

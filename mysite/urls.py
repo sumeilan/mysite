@@ -19,12 +19,13 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url('add/',views.post),
-    path('index/',views.index, name='index'),
-    path('test/', views.test,name='test'),
+    # path('index/',views.index, name='index'),
+    path('index/', views.Page.as_view(page="index.html"), name='index'),
+    path('test/', views.Page.as_view(page="test1.html"), name='test'),
+    path('lemon/', views.Page.as_view(page="lemon.html"), name='lemon'),
+    path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),
+    url('add/', views.post),
     path('testp/', views.testp),
     path('testapi/', views.testapi),
-    path('lemon/', views.lemon,name='lemon'),
-    path('testcase/', views.testcase,name='testcase'),
     path('connect_adb/', views.connect_adb),
 ]
