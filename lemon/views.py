@@ -36,7 +36,7 @@ def testp(request):
             res = send_url(env, path, header, body)
             return HttpResponse(res)
         else:
-            return HttpResponse(u'输入为空')
+            return HttpResponse(u'输入为空 ')
     else:
 
         return HttpResponse(u'方法不对')
