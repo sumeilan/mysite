@@ -43,7 +43,7 @@ def testp(request):
 
 
 def connect_adb(request):
-    # swipe = "adb shell input swipe 500 1000 500 10"
+    #swipe = "adb shell input swipe 500 1000 500 10"
     swipe = "adb devices"
     re = os.popen(swipe)
     return HttpResponse(re)
