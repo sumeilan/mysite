@@ -46,16 +46,28 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item "><a href="{% url 'index' %}">主页</a></li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">小工具</a>
+                <li class="layui-nav-item"><a href="{% url 'index' %}">主页</a></li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">接口调试</a>
                     <dl class="layui-nav-child">
-                        <dd ><a href="{% url 'testcase' %}">接口调试</a></dd>
-                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd class="layui-this"><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
+                        <dd><a href="javascript:;">执行接口测试</a></dd>
+                        <dd><a href="">查看之前的测试记录</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">excel格式处理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">excel格式处理</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">ABtest</a></li>
+                <li class="layui-nav-item"><a href="">monkey runner</a></li>
+                <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
+                <li class="layui-nav-item"><a href="{% url 'testcase' %}">接口调试</a></li>
+                <li class="layui-nav-item layui-this"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
+
             </ul>
         </div>
     </div>
@@ -66,36 +78,16 @@
         </fieldset>
         <form class="layui-form" action="" lay-filter="example">
             <div class="layui-form-item">
-                <label class="layui-form-label">设备信息</label>
+                <label class="layui-form-label">test</label>
                 <div class="layui-input-block">
-                    <input type="text" name="device" id="device" lay-verify="title" placeholder="设备信息"
-                           class="layui-input" style="width: 80%">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">浏览内容</label>
-                <div class="layui-input-inline">
-                    <select name="way">
-                        <option value="">请选择浏览方式</option>
-                        <option value="上滑" selected="">上滑</option>
-                        <option value="左滑喜欢">左滑喜欢</option>
-                        <option value="右滑不喜欢">右滑不喜欢</option>
-                    </select>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="nums">
-                        <option value="">请选择次数</option>
-                        <option value="1">1</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="50">50</option>
-                    </select>
+                    <input type="text" name="device" id="device" lay-verify="title" placeholder="test"
+                           class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">连接设备
+                    <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">保存到excel
                     </button>
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo2">确定</button>
                 </div>

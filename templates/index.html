@@ -21,7 +21,6 @@
                 <dl class="layui-nav-child">
                     <dd><a href="">邮件管理</a></dd>
                     <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
                 </dl>
             </li>
         </ul>
@@ -42,31 +41,18 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-this"><a href="{% url 'index' %}">主页</a></li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;">接口</a>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">执行接口测试</a></dd>
-                        <dd><a href="">查看之前的测试记录</a></dd>
+                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">excel格式处理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">excel格式处理</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">ABtest</a></li>
-                <li class="layui-nav-item"><a href="">monkey runner</a></li>
-                <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
-                <li class="layui-nav-item"><a href="{% url 'testcase' %}">接口调试</a></li>
-                <li class="layui-nav-item"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
-
+                <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
             </ul>
         </div>
     </div>
@@ -84,7 +70,7 @@
                                         <div class="layui-card-body">
                                             <div class="layui-carousel layadmin-carousel layadmin-shortcut" lay-anim=""
                                                  lay-indicator="inside" lay-arrow="none"
-                                                 style="width: 100%; height: 280px;">
+                                                 style="ewidth: 100%; height: 280px;">
                                                 <div carousel-item="">
                                                     <ul class="layui-row layui-col-space10 layui-this">
                                                         <li class="layui-col-xs3">

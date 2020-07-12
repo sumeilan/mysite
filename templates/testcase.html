@@ -45,28 +45,16 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item"><a href="{% url 'index' %}">主页</a></li>
-                <li class="layui-nav-item">
-                    <a class="" href="javascript:;">接口调试</a>
+                <li class="layui-nav-item "><a href="{% url 'index' %}">主页</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">执行接口测试</a></dd>
-                        <dd><a href="">查看之前的测试记录</a></dd>
+                        <dd class="layui-this"><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">excel格式处理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">excel格式处理</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">ABtest</a></li>
-                <li class="layui-nav-item"><a href="">monkey runner</a></li>
-                <li class="layui-nav-item"><a href="">安卓小脚本</a></li>
-                <li class="layui-nav-item layui-this"><a href="{% url 'testcase' %}">接口调试</a></li>
-                <li class="layui-nav-item"><a href="{% url 'lemon' %}">柠檬精小脚本</a></li>
-
+                <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
             </ul>
         </div>
     </div>
@@ -133,8 +121,8 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
-                    {#                    <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>#}
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">执行测试</button>
+                    <button type="submit" class="layui-btn layui-btn-disabled" lay-submit="" lay-filter="save_case" id="save">保存用例</button>
                 </div>
             </div>
         </form>
@@ -190,6 +178,7 @@
                         if (data.msg == '请求成功') {
                             $("#test_result").html('pass')
                             document.getElementById('test_result').style.color = 'green'
+                            document.getElementById('save').setAttribute("class","layui-btn")
                         }
                         else {
                             $("#test_result").html('fail')
@@ -214,9 +203,6 @@
                 ,"header": "{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"
             });
         });
-
-        {#form.val('example', {#}
-        {#    "header": "{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"});#}
 
         //表单取值
         layui.$('#LAY-component-form-getval').on('click', function () {
