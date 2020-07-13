@@ -43,9 +43,9 @@ def testp(request):
 
 
 def connect_adb(request):
-    #swipe = "adb shell input swipe 500 1000 500 10"
     swipe = "adb devices"
-    re = os.popen(swipe)
+    ww = "python E:\python\tools\shouye_bofangye.py"
+    re = os.popen(ww)
     return HttpResponse(re)
 
 def save_case(request):

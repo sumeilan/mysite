@@ -102,7 +102,6 @@
             </div>
         </form>
 
-
     </div>
 
     <div class="layui-footer">
@@ -130,6 +129,7 @@
         layui.$('#LAY-component-form-setval').on('click', function () {
             $.ajax({
                 url: "/connect_adb/",
+
                 success: function (data) {
                     form.val('example', {
                         "device": data // "name": "value"
