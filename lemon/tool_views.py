@@ -13,3 +13,11 @@ def handel_excel(request):
     swipe = "python E:\\python\\tools\\format_excel.py " + file + " " + parma
     re = os.popen(swipe)
     return HttpResponse(swipe)
+
+def handel_csv(request):
+    if request.POST:
+        parma = request.POST.get("parma", None)
+        file = request.POST.get("file", None)
+    swipe = "python E:\\python\\tools\\format_csv.py " + file + " " + parma
+    re = os.popen(swipe)
+    return HttpResponse(swipe)

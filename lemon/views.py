@@ -14,7 +14,7 @@ class Page(View):
 def send_url(env, path, header, body):
     # url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
     if env == 'demo':
-        url = 'http://lemondream.chumanapp.com' + path
+        url = 'http://api-demo.lemondream.cn' + path
     elif env == 'api2':
         url = 'http://api-api2.lemondream.cn' + path
     else:
@@ -23,7 +23,8 @@ def send_url(env, path, header, body):
     body = body
     headers = eval(header)
     response = requests.post(url, body, headers=headers, verify=False)
-    return HttpResponse(response, content_type="application/json")
+    # return HttpResponse(response, content_type="application/json")
+    return HttpResponse(response)
 
 
 def testp(request):
@@ -44,8 +45,8 @@ def testp(request):
 
 def connect_adb(request):
     swipe = "adb devices"
-    ww = "python E:\python\tools\shouye_bofangye.py"
-    re = os.popen(ww)
+    # ww = "python E:\python\tools\shouye_bofangye.py"
+    re = os.popen(swipe)
     return HttpResponse(re)
 
 def save_case(request):

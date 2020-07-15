@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from lemon import views,excel_views
+from lemon import views,tool_views
 from lemon import views2
 
 urlpatterns = [
@@ -25,10 +25,12 @@ urlpatterns = [
     path('test/', views.Page.as_view(page="test1.html"), name='test'),
     path('lemon/', views.Page.as_view(page="lemon.html"), name='lemon'),
     path('excel/', views.Page.as_view(page="excel.html"), name='excel'),
+    path('csv/', views.Page.as_view(page="csv.html"), name='csv'),
     path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),
     url('add/', views2.post),
     path('testp/', views.testp),
     path('testapi/', views2.testapi),
     path('connect_adb/', views.connect_adb),
-    path('handel_excel/', excel_views.handel_excel),
+    path('handel_excel/', tool_views.handel_excel),
+    path('handel_csv/', tool_views.handel_csv),
 ]

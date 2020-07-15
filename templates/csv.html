@@ -50,8 +50,8 @@
                     <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
                         <dd ><a href="{% url 'testcase' %}">接口调试</a></dd>
-                        <dd class="layui-this"><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd ><a href="{% url 'csv' %}">csv处理</a></dd>
+                        <dd ><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd class="layui-this"><a href="{% url 'csv' %}">csv处理</a></dd>
                         <dd ><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
                     </dl>
                 </li>
@@ -62,32 +62,26 @@
 
     <div class="layui-body">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top:20px;">
-            <legend>excel小工具</legend>
+            <legend>csv小工具</legend>
         </fieldset>
         <form class="layui-form" action="" lay-filter="example">
             <div class="layui-form-item">
                 <label class="layui-form-label">文件路径:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="file" id="file"  placeholder="请输入文件路径，要求xlsx后缀"
+                    <input type="text" name="file" id="file"  placeholder="请输入文件路径，要求csv后缀"
                            class="layui-input" style="width: 80%">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" id="del_all_excel">删除全部</button>
-                    <button type="button" class="layui-btn" id="del_excel">删除非第一行</button>
-                    <button type="button" class="layui-btn" id="del_null_row">删除空/null行</button>
-                    <button type="button" class="layui-btn" id="del_dup">删除重复行(未处理)</button>
+                    <button type="button" class="layui-btn" id="test">删除全部</button>
+                    <button type="button" class="layui-btn" id="del_some_row">删除前N行</button>
+                    <button type="button" class="layui-btn" id="del_some_col">删除某列</button>
+                    <button type="button" class="layui-btn" id="del_all_col">删除全部列</button>
                     <button type="submit" class="layui-btn" lay-submit="demo2" lay-filter="test">test</button>
                 </div>
 
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="button" class="layui-btn " id="format_excel" style="background-color: #907a43b3;">样式处理：接口用例</button>
-                    <button type="button" class="layui-btn " id="format_normal_excel" style="background-color: #907a43b3;">样式处理：普通</button>
-                </div>
             </div>
         </form>
     </div>
@@ -128,12 +122,13 @@
         });
 
         //处理excel格式-接口用例
-        layui.$('#format_excel').on('click', function (data) {
-        var file = $('#file').val();
+        layui.$('#test').on('click', function (data) {
+            var file = $('#file').val();
+
             $.ajax({
                 url: "/handel_excel/",
                 type: 'POST',
-                data: { parma: "format_excel",file:file},
+                data: { parma: "format_excel"},
                 dataType: "json",
                 success: function () {
                     form.val('example', {
