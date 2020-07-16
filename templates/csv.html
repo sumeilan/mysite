@@ -69,20 +69,24 @@
                 <label class="layui-form-label">文件路径:</label>
                 <div class="layui-input-block">
                     <input type="text" name="file" id="file"  placeholder="请输入文件路径，要求csv后缀"
-                           class="layui-input" style="width: 80%">
+                           class="layui-input" style="width: 20%;display:inline">
+                    <button type="button" class="layui-btn" id="del_all_row">删除全部行（不包括第一行）</button>
+                    <button type="button" class="layui-btn" id="del_all_col">删除全部列</button>
                 </div>
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">请输入N:</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn" id="test">删除全部</button>
-                    <button type="button" class="layui-btn" id="del_some_row">删除前N行</button>
-                    <button type="button" class="layui-btn" id="del_some_col">删除某列</button>
-                    <button type="button" class="layui-btn" id="del_all_col">删除全部列</button>
-                    <button type="submit" class="layui-btn" lay-submit="demo2" lay-filter="test">test</button>
-                </div>
+                    <input type="text" name="num" id="num"  placeholder="请输入数字"
+                           class="layui-input" style="width: 10%;display:inline">
 
+                    <button type="button" class="layui-btn" id="del_some_row">删除前N行（不包括第一行）</button>
+                    <button type="button" class="layui-btn" id="del_some_col">删除某列</button>
+                    <button type="submit" class="layui-btn" lay-submit="demo2" lay-filter="test">赋值</button>
+                </div>
             </div>
+
         </form>
     </div>
 
@@ -105,30 +109,22 @@
         //获取form的值
         form.on('submit(test)', function (data) {
             var file = $('#file').val();
-            layer.alert(file)
-            $.ajax({
-                url: "/handel_excel/",
-                type: 'POST',
-                data: { parma: "format_excel",file:file},
-                dataType: "json",
-                success: function () {
-                    form.val('example', {
-                        "file": 'done' // "name": "value"
+            <!--layer.alert(file)-->
+            form.val('example', {
+                        "file": 'D:\\JMeter\\work\\lemon2.csv' // "name": "value"
                     });
-                    layer.msg('处理成功')
-                }
-            });
             return false;
         });
 
-        //处理excel格式-接口用例
-        layui.$('#test').on('click', function (data) {
+        //删除全部行
+        layui.$('#del_all_row').on('click', function (data) {
             var file = $('#file').val();
+            console.log("file:", file);
 
             $.ajax({
-                url: "/handel_excel/",
+                url: "/handel_csv/",
                 type: 'POST',
-                data: { parma: "format_excel"},
+                data: { parma: "del_all_row",file:file},
                 dataType: "json",
                 success: function () {
                     form.val('example', {
@@ -139,13 +135,13 @@
             });
         });
 
-        //处理excel格式-普通
-        layui.$('#format_normal_excel').on('click', function (data) {
+        //删除全部列
+        layui.$('#del_all_col').on('click', function (data) {
             var file = $('#file').val();
             $.ajax({
-                url: "/handel_excel/",
+                url: "/handel_csv/",
                 type: 'POST',
-                data: { parma: "format_normal_excel",file:file},
+                data: { parma: "del_all_col",file:file},
                 dataType: "json",
                 success: function () {
                     form.val('example', {
@@ -158,13 +154,14 @@
 
 
 
-        //删除所有行
-        layui.$('#del_all_excel').on('click', function (data) {
+        //删除前N行
+        layui.$('#del_some_row').on('click', function (data) {
             var file = $('#file').val();
+            var num = $('#num').val();
             $.ajax({
-                url: "/handel_excel/",
+                url: "/handel_csv/",
                 type: 'POST',
-                data: { parma: "del_all_excel",file:file},
+                data: { parma: "del_some_row",file:file,num:num},
                 dataType: "json",
                 success: function () {
                     form.val('example', {
@@ -175,13 +172,14 @@
             });
         });
 
-        //删除非第一行
-        layui.$('#del_excel').on('click', function (data) {
+        //删除某列
+        layui.$('#del_some_col').on('click', function (data) {
             var file = $('#file').val();
+            var num = $('#num').val();
             $.ajax({
                 url: "/handel_excel/",
                 type: 'POST',
-                data: { parma: "del_excel",file:file},
+                data: { parma: "del_some_col",file:file，num:num},
                 dataType: "json",
                 success: function () {
                     form.val('example', {
@@ -192,22 +190,6 @@
             });
         });
 
-        //删除null和空行
-        layui.$('#del_null_row').on('click', function (data) {
-            var file = $('#file').val();
-            $.ajax({
-                url: "/handel_excel/",
-                type: 'POST',
-                data: { parma: "del_null_row",file:file},
-                dataType: "json",
-                success: function () {
-                    form.val('example', {
-                        "file": 'done' // "name": "value"
-                    });
-                    layer.msg('处理成功')
-                }
-            });
-        });
     });
 
 
