@@ -49,7 +49,7 @@
                     <dl class="layui-nav-child">
                         <dd class="layui-this"><a href="{% url 'testcase' %}">接口调试</a></dd>
                         <dd><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd ><a href="{% url 'csv' %}">csv处理</a></dd>
+                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
                         <dd><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
                     </dl>
                 </li>
@@ -63,7 +63,7 @@
             <legend>接口调试</legend>
         </fieldset>
 
-        <form class="layui-form" action="" lay-filter="example">
+        <form class="layui-form" action="" lay-filter="example" style="width:70%">
             <div class="layui-form-item">
                 <label class="layui-form-label">测试环境</label>
                 <div class="layui-input-block">
@@ -78,21 +78,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">path</label>
                 <div class="layui-input-block">
-                    <input name="path" placeholder="请输入" autocomplete="off" class="layui-input">
+                    <input name="path" placeholder="请输入" autocomplete="off" class="layui-input" id="path">
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">header</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" name="header" value="header"></textarea>
+                    <textarea class="layui-textarea" name="header" placeholder="请输入header" id="header"></textarea>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">body</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="body"></textarea>
+                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="body" id="body"></textarea>
                 </div>
             </div>
 
@@ -122,9 +122,77 @@
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
                     <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">执行测试</button>
-                    <button type="submit" class="layui-btn layui-btn-disabled" lay-submit="" lay-filter="save_case"
-                            id="save">保存用例
+                    <button type="button" class="layui-btn layui-btn-disabled" lay-filter="save_case" id="save_case"
+                            >保存用例
                     </button>
+                </div>
+            </div>
+        </form>
+
+        <form class="layui-form" action="" lay-filter="case" id="case" style="display:none;width:70%">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用例路径</label>
+                <div class="layui-input-block">
+                    <input name="case_name" autocomplete="off" class="layui-input" value="E:\\python\\tools\\datas\\test2.xlsx" id ="case_name">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">用例模块</label>
+                <div class="layui-input-block">
+                    <select name="module" lay-filter="module">
+                        <option value="1" checked="">首页</option>
+                        <option value="2">注册登录</option>
+                        <option value="3">个人空间页</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用例名称</label>
+                <div class="layui-input-block">
+                    <input name="case_name" placeholder="请输入用例名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">请求类型</label>
+                <div class="layui-input-block">
+                    <select name="type" lay-filter="type">
+                        <option value="post" checked="">post</option>
+                        <option value="get">get</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">path</label>
+                <div class="layui-input-block">
+                    <input name="c_path" placeholder="请输入" autocomplete="off" class="layui-input" id="c_path">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">header</label>
+                <div class="layui-input-block">
+                    <select name="cheader" lay-filter="cheader" id="cheader">
+                        <option value="app">app header</option>
+                        <option value="h5">h5 header</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">body</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="c_body" id="c_body"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">期望结果</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="e_result"
+                              id="e_result"></textarea>
                 </div>
             </div>
         </form>
@@ -145,23 +213,6 @@
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
-            , pass: [
-                /^[\S]{6,12}$/
-                , '密码必须6到12位，且不能出现空格'
-            ]
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
         //监听提交
         form.on('submit(demo1)', function (data) {
             {#datas = JSON.stringify(data.field)#}
@@ -180,7 +231,8 @@
                         if (data.msg == '请求成功') {
                             $("#test_result").html('pass')
                             document.getElementById('test_result').style.color = 'green'
-                            document.getElementById('save').setAttribute("class","layui-btn")
+                            document.getElementById('save_case').setAttribute("class","layui-btn")
+                            $("#save_case").attr("disabled",false);
                         }
                         else {
                             $("#test_result").html('fail')
@@ -189,8 +241,6 @@
                     else {
                         $("#test_result").html('fail')
                     }
-
-
                 }
             });
             return false;
@@ -202,9 +252,51 @@
                 "path": "/api/banner/get_banner_list" // "name": "value"
                 ,"expect_result":"请求成功"
                 ,"body":'{"type":"4"}'
-                ,"header": "{'versionCode': 'android_1.9.3', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"
+                ,"header": "{'versionCode': 'android_2.1.0', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"
             });
         });
+
+        //保存用例
+        layui.$('#save_case').on('click', function () {
+           var path = $('#path').val();
+           var header = $('#header').val();
+           var body = $('#body').val();
+           var expect_result = $('#expect_result').val();
+           var file = $('#case_name').val();
+           var cheader = $('#cheader').val();
+
+           layer.open({
+			  type: 1,
+			  title:"保存用例",
+			  area:['50%','68%'],
+			  btn:['保存', '取消'],
+			  shadeClose: true,
+			  shade: 0 ,
+			  content: $("#case"),
+			  success:	function(){
+			     form.val('case', {
+                    "c_path": path,
+                    "c_header": header,
+                    "c_body": body,
+                    "e_result" : expect_result
+            });
+					},
+			  yes:function(index, layero){
+                    $.ajax({
+                    url: "/save_case/",
+                    type: 'POST',
+                    data: {file:file, parma:"0",path:path,header:cheader},
+                    dataType: "json",
+                    success: function(){
+                        layer.alert('3111111111111111113');
+                    }
+                    });
+                    layer.msg('保存成功');
+                    layer.close(index);
+				    }
+			});
+        });
+
 
         //表单取值
         layui.$('#LAY-component-form-getval').on('click', function () {
@@ -213,6 +305,7 @@
         });
 
     });
+
 
 
 </script>

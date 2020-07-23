@@ -33,4 +33,5 @@ urlpatterns = [
     path('connect_adb/', views.connect_adb),
     path('handel_excel/', tool_views.handel_excel),
     path('handel_csv/', tool_views.handel_csv),
+    path('save_case/', tool_views.save_case),
 ]
