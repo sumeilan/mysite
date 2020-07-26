@@ -27,6 +27,7 @@ urlpatterns = [
     path('excel/', views.Page.as_view(page="excel.html"), name='excel'),
     path('csv/', views.Page.as_view(page="csv.html"), name='csv'),
     path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),
+    path('api_test/', views.Page.as_view(page="api_test.html"), name='api_test'),
     url('add/', views2.post),
     path('testp/', views.testp),
     path('testapi/', views2.testapi),
@@ -34,4 +35,5 @@ urlpatterns = [
     path('handel_excel/', tool_views.handel_excel),
     path('handel_csv/', tool_views.handel_csv),
     path('save_case/', tool_views.save_case),
+    path('report/',tool_views.report),
 ]
