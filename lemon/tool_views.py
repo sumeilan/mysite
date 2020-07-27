@@ -32,9 +32,7 @@ def save_case(request):
     return HttpResponse(swipe)
 
 def report(request):
-    if request.POST:
-        # file = request.POST.get("file", None)
-        file = 'E:\\python\\testcase\\report'
+    file = 'E:\\python\\testcase\\report'
     data = '{"code":0,"msg":"","count":10,"data":[{"id":10,"file":"2020-07-27.html","option":"查看"},{"id":10,"file":"2020-07-27.html","option":"查看"}]}'
     swipe = "python E:\\python\\tools\\lemon\\get_file.py " + file
     re = os.popen(swipe)
