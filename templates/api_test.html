@@ -81,8 +81,13 @@
             </div>
 
             <div class="layui-form-item">
-                <div class="layui-form-label" style="width: 80%;padding-left: 3%">
+                <div class="layui-inline" style="padding-left: 2%">
                     <table id="demo" lay-filter="test"></table>
+
+                    <script type="text/html" id="barDemo">
+                        <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </script>
                 </div>
             </div>
 
@@ -110,26 +115,39 @@
             , url: '/report/'
             , method: 'POST'
             , response: {dataName: 'data'}
+            ,toolbar: '#toolbarDemo'
             , cols: [[
                 {type: 'checkbox'}
-                , {field: 'id', width: '20%', title: 'ID', sort: true}
-                , {field: 'time', width: '50%', title: '时间'}
-                , {field: 'option', width: '25%', title: '操作'}
+                , {field: 'id', width: 150, title: 'ID', sort: true}
+                , {field: 'file', width: 350, title: '文件名'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
 
             ]]
             , page: true
         });
 
-        //监听工具条
-        table.on('tool(order1)', function (obj) {
-            var data = obj.data //获取当前行数据
-                ,
-                layEvent = obj.event; //获得lay-event对应的值
-            if (layEvent === 'edit') {
-                //此处为编辑操作的代码
-
-            } else if (layEvent == 'del') {
-                //此处为删除操作的代码
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            var url="http://baidu.com";
+            var title="新标签";
+            //console.log(obj)
+            if(obj.event === 'del'){
+              layer.confirm('真的删除行么', function(index){
+                obj.del();
+                layer.close(index);
+              });
+            } else if(obj.event === 'detail'){
+                window.open(url)
+                $.ajax({
+                url: "/local_file/",
+                type: 'POST',     // 请求类型，常用的有 GET 和 POST
+                data: {file:data.file},
+                dataType: "json",
+                success: function (data) {
+                    layer.msg('success');
+                 }
+                });
             }
         });
 
@@ -164,6 +182,9 @@
             return false;
         });
     });
+
+
+
 
 
 </script>

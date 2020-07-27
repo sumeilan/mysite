@@ -36,4 +36,5 @@ urlpatterns = [
     path('handel_csv/', tool_views.handel_csv),
     path('save_case/', tool_views.save_case),
     path('report/',tool_views.report),
+    path('local_file/',tool_views.local_file),
 ]
