@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>接口测试</title>
+    <title>接口测试报告</title>
     <link rel="stylesheet" href="{% static '/css/layui.css' %}">
 </head>
 <body class="layui-layout-body">
@@ -47,8 +47,8 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="{% url 'api_test' %}">接口测试</a></dd>
-                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
+                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
+                        <dd class="layui-this"><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
                         <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
                         <dd><a href="{% url 'excel' %}">excel处理</a></dd>
                         <dd><a href="{% url 'csv' %}">csv处理</a></dd>
@@ -62,25 +62,15 @@
 
     <div class="layui-body">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top:20px;">
-            <legend>接口测试</legend>
+            <legend>接口测试报告</legend>
         </fieldset>
-
-        <table class="layui-hide" id="test" lay-filter="test"></table>
-
-        <script type="text/html" id="toolbarDemo">
-            <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-sm" lay-event="isSome">批量执行</button>
-                <button class="layui-btn layui-btn-sm" lay-event="isAll">一键执行</button>
-            </div>
-        </script>
+        <table class="layui-hide" id="demo" lay-filter="test"></table>
 
         <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs" lay-event="detail">查看测试报告</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
 
-
-        <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
     </div>
 
     <div class="layui-footer">
@@ -92,76 +82,60 @@
 <script src='{% static "layui.all.js" %}' charset="utf-8"></script>
 
 <script>
-layui.use('table', function(){
-  var table = layui.table;
+    layui.use(['form', 'table', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , table = layui.table
+            , laydate = layui.laydate;
 
-  table.render({
-    elem: '#test'
-    ,url:'/case_module/'
-    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-    ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-      title: '提示'
-      ,layEvent: 'LAYTABLE_TIPS'
-      ,icon: 'layui-icon-tips'
-    }]
-    ,title: '用户数据表'
-    ,cols: [[
-      {type: 'checkbox', fixed: 'left'}
-      ,{field:'id', title:'ID', width:150, fixed: 'left', unresize: true, sort: true}
-      ,{field:'name', title:'模块', width:350, edit: 'text'}
-      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
-    ]]
-    ,page: true
-  });
+        table.render({
+            elem: '#demo'
+            , url: '/report/'
+            , method: 'POST'
+            , response: {dataName: 'data'}
+            ,toolbar: '#toolbarDemo'
+            , cols: [[
+                {type: 'checkbox'}
+                , {field: 'id', width: 150, title: 'ID', sort: true}
+                , {field: 'file', width: 350, title: '文件名'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 
-  //头工具栏事件
-  table.on('toolbar(test)', function(obj){
-    var checkStatus = table.checkStatus(obj.config.id);
-    switch(obj.event){
-      case 'isSome':
-        var data = checkStatus.data;
-        layer.alert(JSON.stringify(data));
-      break;
-      case 'isAll':
-        $.ajax({
-                url: "/run_all/",
-                type: 'POST',     // 请求类型，常用的有 GET 和 POST
-                data: {"param":"e"},
-                dataType: "json",
-                success: function () {
-                    layer.alert('success');
-                 }
-               });
-      break;
-      //自定义头工具栏右侧图标 - 提示
-      case 'LAYTABLE_TIPS':
-        layer.alert('这是工具栏右侧自定义的一个图标按钮');
-      break;
-    };
-  });
+            ]]
+            , page: true
+        });
 
-  //监听行工具事件
-  table.on('tool(test)', function(obj){
-    var data = obj.data;
-    //console.log(obj)
-    if(obj.event === 'del'){
-      layer.confirm('真的删除行么', function(index){
-        obj.del();
-        layer.close(index);
-      });
-    } else if(obj.event === 'edit'){
-        $.ajax({
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            var title="新标签";
+            //console.log(obj)
+            if(obj.event === 'del'){
+              $.ajax({
                 url: "/local_file/",
                 type: 'POST',     // 请求类型，常用的有 GET 和 POST
-                data: {"file":data.file,"param":"e"},
+                data: {file:data.file,"param":"del"},
+                dataType: "json"
+                });
+                obj.del();
+                layer.close(index);
+            } else if(obj.event === 'detail'){
+                $.ajax({
+                url: "/local_file/",
+                type: 'POST',     // 请求类型，常用的有 GET 和 POST
+                data: {file:data.file,"param":"open"},
                 dataType: "json",
-                complete: function () {
-                    layer.alert('success');
+                complete: function (data) {
+                    layer.msg('success');
                  }
                 });
-               }
-                });
-});
+            }
+        });
+    });
+
+
+
+
+
 
 </script>
 </body>

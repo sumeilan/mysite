@@ -16,11 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from lemon import views,tool_views
+from lemon import views, tool_views
 from lemon import views2
 
 urlpatterns = [
-    # path('index/',views.index, name='index'),
     path('index/', views.Page.as_view(page="index.html"), name='index'),
     path('test/', views.Page.as_view(page="test1.html"), name='test'),
     path('lemon/', views.Page.as_view(page="lemon.html"), name='lemon'),
@@ -28,6 +27,7 @@ urlpatterns = [
     path('csv/', views.Page.as_view(page="csv.html"), name='csv'),
     path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),
     path('api_test/', views.Page.as_view(page="api_test.html"), name='api_test'),
+    path('testcase_report/', views.Page.as_view(page="testcase_report.html"), name='testcase_report'),
     url('add/', views2.post),
     path('testp/', views.testp),
     path('testapi/', views2.testapi),
@@ -35,6 +35,8 @@ urlpatterns = [
     path('handel_excel/', tool_views.handel_excel),
     path('handel_csv/', tool_views.handel_csv),
     path('save_case/', tool_views.save_case),
-    path('report/',tool_views.report),
-    path('local_file/',tool_views.local_file),
+    path('report/', tool_views.report),
+    path('case_module/',tool_views.case_module),
+    path('local_file/', tool_views.local_file),
+    path('run_all/', tool_views.run_all),
 ]

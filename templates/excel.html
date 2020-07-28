@@ -49,10 +49,12 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd ><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
+                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
+                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
                         <dd class="layui-this"><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd ><a href="{% url 'csv' %}">csv处理</a></dd>
-                        <dd ><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
+                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
+                        <dd><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
