@@ -26,10 +26,18 @@ def handel_csv(request):
 
 def save_case(request):
     if request.POST:
-        parma = request.POST.get("parma", None)
-        file = request.POST.get("file", None)
+        case_name = request.POST.get("case_name", None)
+        file1 = request.POST.get("module", None)
 
-    swipe = "python E:\\test_python\\tools\\lemon\\save_case.py " + file + " " + parma
+    #python E:\python\tools\lemon\save_case.py E:\python\tools\datas\test2.xlsx 0 ["case_name", "module"]
+
+    file = 'E:\\python\\tools\\datas\\test2.xlsx'
+    sheet_id = "0"
+    case = ["case_name", "module", "url", "request_method", "request_headers", "request_parameter","data_from_response", "request_depend_data", "expect_result"]
+    case=",".join(case)
+    print(case)
+
+    swipe = "python E:\\python\\tools\\lemon\\save_case.py " + file + " " + sheet_id + " " + case
     re = os.popen(swipe)
     return HttpResponse(swipe)
 
@@ -42,12 +50,11 @@ def report(request):
 
 
 def case_module(request):
-    file = "E:\\python\\tools\\datas\\test2.xlsx"
-    parma = request.POST.get("parma", None)
+    file = "E:\\python\\testcase\\data\\case1.xlsx"
     swipe = "python E:\\python\\tools\\lemon\\response_data.py " + file
     re = os.popen(swipe)
     data = '{"code": "0", "msg": "\u64cd\u4f5c\u6210\u529f", "count": 10, "data": [{"id": 1, "name": "Sheet1", "right": "\u6267\u884c"}, {"id": 2,"name": "Sheet2", "right": "\u6267\u884c"}, {"id": 3, "name": "Sheet3", "right": "\u6267\u884c"}]}'
-    return HttpResponse(data)
+    return HttpResponse(re)
 
 def run_all(request):
     swipe = "python E:\\python\\testcase\\brun.py"

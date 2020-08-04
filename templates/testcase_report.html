@@ -67,8 +67,8 @@
         <table class="layui-hide" id="demo" lay-filter="test"></table>
 
         <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-xs" lay-event="detail">查看测试报告</a>
-            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+            <a class="layui-btn layui-btn-sm" lay-event="detail">查看测试报告</a>
+            <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
         </script>
 
     </div>
@@ -96,9 +96,9 @@
             ,toolbar: '#toolbarDemo'
             , cols: [[
                 {type: 'checkbox'}
-                , {field: 'id', width: 150, title: 'ID', sort: true}
-                , {field: 'file', width: 350, title: '文件名'}
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
+                , {field: 'id', width: '20%', title: 'ID', sort: true}
+                , {field: 'file', width: '40%', title: '测试报告'}
+                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:'30%'}
 
             ]]
             , page: true
