@@ -135,31 +135,35 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">用例路径</label>
                 <div class="layui-input-block">
-                    <input name="case_name" autocomplete="off" class="layui-input" value="E:\\test_python\\tools\\datas\\test2.xlsx" id ="case_name">
+                    <input name="case_file" autocomplete="off" class="layui-input" value="E:\python\tools\datas\test2.xlsx" id ="case_file">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">用例模块</label>
                 <div class="layui-input-block">
-                    <select name="module" lay-filter="module">
-                        <option value="1" checked="">首页</option>
-                        <option value="2">注册登录</option>
-                        <option value="3">个人空间页</option>
+                    <select name="module" id="module" lay-filter="module">
+                        <option value="0" checked="">首页</option>
+                        <option value="1">注册登录</option>
+                        <option value="2">个人空间页</option>
+                        <option value="4">内容创作</option>
+                        <option value="5">播放页</option>
+                        <option value="6">H5活动</option>
+                        <option value="7">赚青柠</option>
                     </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">用例名称</label>
                 <div class="layui-input-block">
-                    <input name="case_name" placeholder="请输入用例名称" autocomplete="off" class="layui-input">
+                    <input name="case_name" id= "case_name" placeholder="请输入用例名称" autocomplete="off" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">请求类型</label>
                 <div class="layui-input-block">
-                    <select name="type" lay-filter="type">
+                    <select name="method" lay-filter="method" id="method">
                         <option value="post" checked="">post</option>
                         <option value="get">get</option>
                     </select>
@@ -176,12 +180,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">header</label>
                 <div class="layui-input-block">
-                    <select name="cheader" lay-filter="cheader" id="cheader">
-                        <option value="app">app header</option>
-                        <option value="h5">h5 header</option>
-                    </select>
+                    <input name="c_header" placeholder="请输入" autocomplete="off" class="layui-input" id="c_header">
                 </div>
             </div>
+
+            <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">header</label>-->
+                <!--<div class="layui-input-block">-->
+                    <!--<select name="method" lay-filter="method" id="c_header">-->
+                        <!--<option value="app_header" checked="">app_header</option>-->
+                        <!--<option value="h5_header">h5_header</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">body</label>
@@ -193,8 +204,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">期望结果</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="e_result"
-                              id="e_result"></textarea>
+                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="e_result" id="e_result"></textarea>
                 </div>
             </div>
         </form>
@@ -254,19 +264,12 @@
                 "path": "/api/banner/get_banner_list" // "name": "value"
                 ,"expect_result":"请求成功"
                 ,"body":'{"type":"4"}'
-                ,"header": "{'versionCode': 'android_2.1.0', 'Content-Type': 'application/json', 'X-Token': '4b5d4b5e0044','Authorization':':82ec573c9e35dghh39e46075hd113j3h'}"
+                ,"header": '{"versionCode":"android_2.2.0","Content-Type":"application/json","X-Token":"4b5d4b5e0044","Authorization":":82ec573c9e35dghh39e46075hd113j3h"}'
             });
         });
 
         //保存用例
         layui.$('#save_case').on('click', function () {
-           var path = $('#path').val();
-           var header = $('#header').val();
-           var body = $('#body').val();
-           var expect_result = $('#expect_result').val();
-           var file = $('#case_name').val();
-           var cheader = $('#cheader').val();
-
            layer.open({
 			  type: 1,
 			  title:"保存用例",
@@ -277,17 +280,24 @@
 			  content: $("#case"),
 			  success:	function(){
 			     form.val('case', {
-                    "c_path": path,
-                    "c_header": header,
-                    "c_body": body,
-                    "e_result" : expect_result
-            });
-					},
+                    "c_path": $('#path').val(),
+                    "c_header": $('#header').val(),
+                    "c_body": $('#body').val(),
+                    "e_result" : $('#expect_result').val(),
+                 });
+			  },
 			  yes:function(index, layero){
                     $.ajax({
                     url: "/save_case/",
                     type: 'POST',
-                    data: {parma:"0"},
+                    data: {"case_file":$('#case_file').val(),
+                    "module":$('#module').val(),
+                    "case_name":$('#case_name').val(),
+                    "c_path":$('#c_path').val(),
+                    "c_header":$('#c_header').val(),
+                    "c_body":JSON.stringify($('#c_body').val()),
+                    "e_result":$('#e_result').val() ,
+                    "method":$('#method').val()},
                     dataType: "json",
                     success: function(){
                         layer.alert('3111111111111111113');
