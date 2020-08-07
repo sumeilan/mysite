@@ -100,8 +100,8 @@
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">期望结果</label>
-                <div class="layui-input-block">
-                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="expect_result"
+                <div class="layui-input-block" >
+                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="expect_result" style="min-height:20px"
                               id="expect_result"></textarea>
                 </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">测试结果</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea" id="test_result"></textarea>
+                    <textarea class="layui-textarea" id="test_result" style="min-height:10px"></textarea>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@
             </div>
         </form>
 
-        <form class="layui-form" action="" lay-filter="case" id="case" style="display:none;width:70%">
+        <form class="layui-form" action="" lay-filter="case" id="case" style="display:none;width:90%">
             <div class="layui-form-item">
                 <label class="layui-form-label">用例路径</label>
                 <div class="layui-input-block">
@@ -177,34 +177,38 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
+            <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">header</label>
                 <div class="layui-input-block">
-                    <input name="c_header" placeholder="请输入" autocomplete="off" class="layui-input" id="c_header">
+                    <textarea class="layui-textarea" name="c_header" placeholder="请输入header" id="c_header" style="min-height:40px"></textarea>
                 </div>
             </div>
-
-            <!--<div class="layui-form-item">-->
-                <!--<label class="layui-form-label">header</label>-->
-                <!--<div class="layui-input-block">-->
-                    <!--<select name="method" lay-filter="method" id="c_header">-->
-                        <!--<option value="app_header" checked="">app_header</option>-->
-                        <!--<option value="h5_header">h5_header</option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">body</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="c_body" id="c_body"></textarea>
+                    <textarea placeholder="请输入json格式的body" class="layui-textarea" name="c_body" id="c_body" style="min-height:10px"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">需要保存的</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入需要保存的返回字段" class="layui-textarea" name="data_from_response" id="data_from_response" style="min-height:10px"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">数据依赖</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入数据依赖字段" class="layui-textarea" name="request_depend_data" id="request_depend_data" style="min-height:10px"></textarea>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">期望结果</label>
                 <div class="layui-input-block">
-                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="e_result" id="e_result"></textarea>
+                    <textarea placeholder="请输入期望结果" class="layui-textarea" name="e_result" id="e_result" style="min-height:10px"></textarea>
                 </div>
             </div>
         </form>
