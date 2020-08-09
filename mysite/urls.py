@@ -23,6 +23,8 @@ urlpatterns = [
     path('index/', views.Page.as_view(page="index.html"), name='index'),
     path('test/', views.Page.as_view(page="test1.html"), name='test'),
     path('lemon/', views.Page.as_view(page="lemon.html"), name='lemon'),
+    path('tools/', views.Page.as_view(page="tools.html"), name='tools'),
+    path('follow/', views.Page.as_view(page="follow.html"), name='follow'),
     path('excel/', views.Page.as_view(page="excel.html"), name='excel'),
     path('csv/', views.Page.as_view(page="csv.html"), name='csv'),
     path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),

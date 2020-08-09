@@ -5,6 +5,7 @@ from django.views import View
 import method, requests
 import json, time, os
 
+root = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 def handel_excel(request):
     if request.POST:
@@ -49,21 +50,26 @@ def save_case(request):
 
 
 def report(request):
-    file = "E:\\python\\testcase\\report"
-    swipe = "python E:\\python\\tools\\lemon\\get_file.py " + file
+    file = root + r"\testcase\report"
+    run = root + r"\tools\lemon\get_file.py "
+    swipe = "python " + str(run) +  str(file)
     re = os.popen(swipe)
+    print('swipe', swipe)
     return HttpResponse(re)
 
 
 def case_module(request):
-    file = "E:\\python\\testcase\\data\\case1.xlsx"
-    swipe = "python E:\\python\\tools\\lemon\\response_data.py " + file
+    file = root + r"\testcase\data\case1.xlsx"
+    run = root + r"\tools\lemon\response_data.py "
+    swipe = "python " + str(run) + str(file)
     re = os.popen(swipe)
     data = '{"code": "0", "msg": "\u64cd\u4f5c\u6210\u529f", "count": 10, "data": [{"id": 1, "name": "Sheet1", "right": "\u6267\u884c"}, {"id": 2,"name": "Sheet2", "right": "\u6267\u884c"}, {"id": 3, "name": "Sheet3", "right": "\u6267\u884c"}]}'
     return HttpResponse(re)
 
 def run_all(request):
-    swipe = "python E:\\python\\testcase\\brun.py"
+    run = root + r"\testcase\brun.py "
+    # swipe = "python E:\\python\\testcase\\brun.py"
+    swipe = "python " + str(run)
     re = os.popen(swipe)
     return HttpResponse(re)
 
@@ -71,7 +77,9 @@ def run_all(request):
 def local_file(request):
     fil = request.POST.get("file", None)
     param = request.POST.get("param", None)
-    file = "E:\\python\\testcase\\report\\" + fil
-    swipe = "python E:\\python\\tools\\local_file.py " + file + " " + param
+    file = root + r"\testcase\report" + "\\" + fil
+    run = root + r"\tools\local_file.py "
+    swipe = "python " + str(run) +  str(file) + " " + param
+    print(swipe)
     re1 = os.popen(swipe)
     return HttpResponse(re1)

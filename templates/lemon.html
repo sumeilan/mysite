@@ -45,19 +45,30 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item "><a href="{% url 'index' %}">主页</a></li>
+                <li class="layui-nav-item"><a href="{% url 'index' %}">主页</a></li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
-                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
-                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
-                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
-                        <dd class="layui-this"><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
+                        <dd><a href="{% url 'tools' %}">方便测试</a></dd>
+                        <dd ><a href="{% url 'follow' %}">关注/取消关注</a></dd>
+                        <dd class="layui-this"><a href="{% url 'lemon' %}">上下/左右滑</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">接口</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
+                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">格式处理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>
@@ -103,12 +114,6 @@
                 </div>
             </div>
             <br>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" id="follow">关注</button>
-                    <button type="button" class="layui-btn layui-btn-normal" id="unfollow">取消关注</button>
-                </div>
-            </div>
         </form>
 
     </div>

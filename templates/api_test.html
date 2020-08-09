@@ -127,8 +127,8 @@ layui.use('table', function(){
                 type: 'POST',     // 请求类型，常用的有 GET 和 POST
                 data: {"param":"e"},
                 dataType: "json",
-                success: function () {
-                    layer.alert('success');
+                complete: function () {
+                    layer.msg('执行成功，测试结果请查看邮件');
                  }
                });
       break;

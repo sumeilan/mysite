@@ -47,15 +47,26 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">小工具</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
-                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
-                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
-                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
-                        <dd ><a href="{% url 'csv' %}">csv处理</a></dd>
-                        <dd><a href="{% url 'lemon' %}">柠檬精小脚本</a></dd>
+                        <dd ><a href="{% url 'tools' %}">方便测试</a></dd>
+                        <dd><a href="{% url 'follow' %}">关注/取消关注</a></dd>
+                        <dd><a href="{% url 'lemon' %}">上下/左右滑</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="{% url 'lemon' %}">test</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">接口</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
+                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">格式处理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>

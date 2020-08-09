@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>小工具</title>
+    <link rel="stylesheet" href="{% static '/css/layui.css' %}">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">Sugelan</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">其实</a></li>
+            <li class="layui-nav-item"><a href="">刚刚好</a></li>
+            <li class="layui-nav-item"><a href="">意外</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://qnc-lemon.chumanapp.com/user/1010/avatar/1592204335981.jpg" class="layui-nav-img">
+                    格兰
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退下</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item"><a href="{% url 'index' %}">主页</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">小工具</a>
+                    <dl class="layui-nav-child">
+                        <dd class="layui-this"><a href="{% url 'tools' %}">方便测试</a></dd>
+                        <dd><a href="{% url 'follow' %}">关注/取消关注</a></dd>
+                        <dd><a href="{% url 'lemon' %}">上下/左右滑</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">接口</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'testcase' %}">接口调试</a></dd>
+                        <dd><a href="{% url 'api_test' %}">接口测试</a></dd>
+                        <dd><a href="{% url 'testcase_report' %}">接口测试报告</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">格式处理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="{% url 'excel' %}">excel处理</a></dd>
+                        <dd><a href="{% url 'csv' %}">csv处理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top:20px;">
+            <legend>方便测试的接口</legend>
+        </fieldset>
+
+        <form class="layui-form" action="" lay-filter="example" style="width:70%">
+            <div class="layui-form-item">
+                <label class="layui-form-label">环境</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="env" value="demo" title="demo" checked="">
+                    <input type="radio" name="env" value="api2" title="api2">
+                    <input type="radio" name="env" value="api" title="api">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"style="width:190px">通过id查看注册手机号:</label>
+                    <div class="layui-input-inline">
+                        <input name="uid" autocomplete="off" class="layui-input" placeholder="请输入uid">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button type="button" class="layui-btn" lay-submit="" lay-filter="uid_phone">执行
+                    </button>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"style="width:190px">清除设备短信上限:</label>
+                    <div class="layui-input-inline">
+                        <input name="device" autocomplete="off" class="layui-input" placeholder="请输入设备号">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button type="button" class="layui-btn" lay-submit="" lay-filter="device">执行
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © 这么久没见
+    </div>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src='{% static "layui.all.js" %}' charset="utf-8"></script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            {#datas = JSON.stringify(data.field)#}
+            {#layer.alert(JSON.stringify(data.field.header))#}
+            var expect_result = $('#expect_result').val();
+            $.ajax({
+                url: "/testp/",
+                type: 'POST',     // 请求类型，常用的有 GET 和 POST
+                data: data.field,
+                dataType: "json",
+                success: function (data) { // 接口调用成功回调函数
+                    console.log("expect_result:", expect_result);
+                    console.log("result:", (JSON.stringify(data.data).search(expect_result)));
+                    $("#actual_result").html(JSON.stringify(data))
+                    if ((JSON.stringify(data).search(expect_result)) != -1) {
+                        if (data.msg == '请求成功') {
+                            $("#test_result").html('pass')
+                            document.getElementById('test_result').style.color = 'green'
+                            document.getElementById('save_case').setAttribute("class", "layui-btn")
+                            $("#save_case").attr("disabled", false);
+                        }
+                        else {
+                            $("#test_result").html('fail')
+                        }
+                    }
+                    else {
+                        $("#test_result").html('fail')
+                    }
+                }
+            });
+            return false;
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            form.val('example', {
+                "path": "/api/banner/get_banner_list" // "name": "value"
+                ,
+                "expect_result": "请求成功"
+                ,
+                "body": '{"type":"4"}'
+                ,
+                "header": '{"versionCode":"android_2.2.0","Content-Type":"application/json","X-Token":"4b5d4b5e0044","Authorization":":82ec573c9e35dghh39e46075hd113j3h"}'
+            });
+        });
+
+        //保存用例
+        layui.$('#save_case').on('click', function () {
+            layer.open({
+                type: 1,
+                title: "保存用例",
+                area: ['50%', '68%'],
+                btn: ['保存', '取消'],
+                shadeClose: true,
+                shade: 0,
+                content: $("#case"),
+                success: function () {
+                    form.val('case', {
+                        "c_path": $('#path').val(),
+                        "c_header": $('#header').val(),
+                        "c_body": $('#body').val(),
+                        "e_result": $('#expect_result').val(),
+                    });
+                },
+                yes: function (index, layero) {
+                    $.ajax({
+                        url: "/save_case/",
+                        type: 'POST',
+                        data: {
+                            "case_file": $('#case_file').val(),
+                            "module": $('#module').val(),
+                            "case_name": $('#case_name').val(),
+                            "c_path": $('#c_path').val(),
+                            "c_header": $('#c_header').val(),
+                            "c_body": JSON.stringify($('#c_body').val()),
+                            "e_result": $('#e_result').val(),
+                            "method": $('#method').val()
+                        },
+                        dataType: "json",
+                        success: function () {
+                            layer.alert('3111111111111111113');
+                        }
+                    });
+                    layer.msg('保存成功');
+                    layer.close(index);
+                }
+            });
+        });
+
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function () {
+            var data = form.val('example');
+            layer.alert(JSON.stringify(data));
+        });
+
+    });
+
+
+</script>
+</body>
+</html>
