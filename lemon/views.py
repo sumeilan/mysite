@@ -23,9 +23,10 @@ def send_url(env, path, header, body):
     body = body
     headers = eval(header)
     response = requests.post(url, body, headers=headers, verify=False)
-    # return HttpResponse(response, content_type="application/json")
+    print(body)
+    print(headers)
+    print(response)
     return HttpResponse(response)
-
 
 def testp(request):
     if request.method == 'POST':
@@ -39,7 +40,6 @@ def testp(request):
         else:
             return HttpResponse(u'输入为空 ')
     else:
-
         return HttpResponse(u'方法不对')
 
 
@@ -48,6 +48,3 @@ def connect_adb(request):
     # ww = "python E:\python\tools\shouye_bofangye.py"
     re = os.popen(swipe)
     return HttpResponse(re)
-
-def save_case(request):
-    return HttpResponse('done')

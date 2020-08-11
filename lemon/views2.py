@@ -8,7 +8,8 @@ import json, time, os
 
 class Page(View):
     page = "index.html"
-    def get(self,request):
+
+    def get(self, request):
         return render(request, self.page)
 
 
@@ -50,24 +51,6 @@ def send_url(env, path, header, body):
     return HttpResponse(response, content_type="application/json")
 
 
-def testp(request):
-    if request.method == 'POST':
-        if request.POST:
-            env = request.POST.get('env', None)
-            path = request.POST.get('path', None)
-            header = request.POST.get('header', None)
-            body = request.POST.get('body', None)
-            res = send_url(env, path, header, body)
-            return HttpResponse(res)
-        else:
-            return HttpResponse(u'输入为空')
-    else:
-        a = 1
-        b = 2
-        res = add_args(a, b)
-        return HttpResponse(res)
-
-
 def post(request):
     if request.method == 'POST':
         d = {}
@@ -85,10 +68,3 @@ def post(request):
             return HttpResponse(u'输入为空')
     else:
         return HttpResponse(u'方法错误')
-
-
-def connect_adb(request):
-    # swipe = "adb shell input swipe 500 1000 500 10"
-    swipe = "adb devices"
-    re = os.popen(swipe)
-    return HttpResponse(re)
