@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-import method, requests
+import requests
 import json, time, os
 
 
@@ -11,8 +11,8 @@ class Page(View):
     def get(self,request):
         return render(request, self.page)
 
+
 def send_url(env, path, header, body):
-    # url = 'http://lemondream.chumanapp.com/api/banner/get_banner_list'
     if env == 'demo':
         url = 'http://api-demo.lemondream.cn' + path
     elif env == 'api2':
@@ -23,9 +23,7 @@ def send_url(env, path, header, body):
     body = body
     headers = eval(header)
     response = requests.post(url, body, headers=headers, verify=False)
-    print(body)
-    print(headers)
-    print(response)
+    print(url)
     return HttpResponse(response)
 
 def testp(request):
@@ -40,7 +38,10 @@ def testp(request):
         else:
             return HttpResponse(u'输入为空 ')
     else:
-        return HttpResponse(u'方法不对')
+        env = request.GET.get('env', None)
+        path = request.GET.get('path', None)
+        print(env)
+        return HttpResponse(env)
 
 
 def connect_adb(request):

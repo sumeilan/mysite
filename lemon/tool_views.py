@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-import method, requests
+import requests
 import json, time, os
 
 root = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))

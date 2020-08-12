@@ -21,8 +21,9 @@ from lemon import views2
 
 urlpatterns = [
     path('index/', views.Page.as_view(page="index.html"), name='index'),
-    path('test/', views.Page.as_view(page="test1.html"), name='test'),
-    path('lemon/', views.Page.as_view(page="lemon.html"), name='lemon'),
+    path('base/', views.Page.as_view(page="base.html"), name='base'),
+    path('test/', views.Page.as_view(page="test.html"), name='test'),
+    path('slide/', views.Page.as_view(page="slide.html"), name='slide'),
     path('tools/', views.Page.as_view(page="tools.html"), name='tools'),
     path('follow/', views.Page.as_view(page="follow.html"), name='follow'),
     path('excel/', views.Page.as_view(page="excel.html"), name='excel'),
@@ -30,9 +31,7 @@ urlpatterns = [
     path('testcase/', views.Page.as_view(page="testcase.html"), name='testcase'),
     path('api_test/', views.Page.as_view(page="api_test.html"), name='api_test'),
     path('testcase_report/', views.Page.as_view(page="testcase_report.html"), name='testcase_report'),
-    url('add/', views2.post),
     path('testp/', views.testp),
-    path('testapi/', views2.testapi),
     path('connect_adb/', views.connect_adb),
     path('handel_excel/', tool_views.handel_excel),
     path('handel_csv/', tool_views.handel_csv),

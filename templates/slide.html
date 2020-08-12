@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="layui-body">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top:20px;">
+        <legend>上下/左右滑动</legend>
+    </fieldset>
+    <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">设备信息</label>
+            <div class="layui-input-block">
+                <input type="text" name="device" id="device" lay-verify="title" placeholder="设备信息"
+                       class="layui-input" style="width: 80%">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">浏览内容</label>
+            <div class="layui-input-inline">
+                <select name="way">
+                    <option value="">请选择浏览方式</option>
+                    <option value="上滑" selected="">上滑</option>
+                    <option value="左滑喜欢">左滑喜欢</option>
+                    <option value="右滑不喜欢">右滑不喜欢</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="nums">
+                    <option value="">请选择次数</option>
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">连接设备
+                </button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo2">确定</button>
+            </div>
+        </div>
+        <br>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //连接设备
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            $.ajax({
+                url: "/connect_adb/",
+                success: function (data) {
+                    form.val('example', {
+                        "device": data // "name": "value"
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
