@@ -8,8 +8,10 @@ import json, time, os
 
 class Page(View):
     page = "index.html"
-    def get(self,request):
+
+    def get(self, request):
         return render(request, self.page)
+
 
 
 def send_url(env, path, header, body):
@@ -25,6 +27,7 @@ def send_url(env, path, header, body):
     response = requests.post(url, body, headers=headers, verify=False)
     print(url)
     return HttpResponse(response)
+
 
 def testp(request):
     if request.method == 'POST':
@@ -42,10 +45,3 @@ def testp(request):
         path = request.GET.get('path', None)
         print(env)
         return HttpResponse(env)
-
-
-def connect_adb(request):
-    swipe = "adb devices"
-    # ww = "python E:\python\tools\shouye_bofangye.py"
-    re = os.popen(swipe)
-    return HttpResponse(re)

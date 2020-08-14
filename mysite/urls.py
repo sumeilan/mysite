@@ -32,7 +32,7 @@ urlpatterns = [
     path('api_test/', views.Page.as_view(page="api_test.html"), name='api_test'),
     path('testcase_report/', views.Page.as_view(page="testcase_report.html"), name='testcase_report'),
     path('testp/', views.testp),
-    path('connect_adb/', views.connect_adb),
+    path('move/', tool_views.move),
     path('handel_excel/', tool_views.handel_excel),
     path('handel_csv/', tool_views.handel_csv),
     path('save_case/', tool_views.save_case),

@@ -7,6 +7,7 @@ import json, time, os
 
 root = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
+
 def handel_excel(request):
     if request.POST:
         parma = request.POST.get("parma", None)
@@ -36,12 +37,11 @@ def save_case(request):
         expect_result = request.POST.get("e_result", None)
         request_method = request.POST.get("method", None)
 
-
     sheet_id = module
     # case = ["case_name", "module", "url", "request_method", "request_headers", "request_parameter", "expect_result"]
-    case = [case_name,module,url,request_method,request_headers,request_parameter,expect_result]
+    case = [case_name, module, url, request_method, request_headers, request_parameter, expect_result]
     case = "@".join(case)
-    print("case",case)
+    print("case", case)
 
     swipe = "python E:\\python\\tools\\lemon\\save_case.py " + file + " " + sheet_id + " " + case
     print(swipe)
@@ -52,7 +52,7 @@ def save_case(request):
 def report(request):
     file = root + r"\testcase\report"
     run = root + r"\tools\lemon\get_file.py "
-    swipe = "python " + str(run) +  str(file)
+    swipe = "python " + str(run) + str(file)
     re = os.popen(swipe)
     print('swipe', swipe)
     return HttpResponse(re)
@@ -65,6 +65,7 @@ def case_module(request):
     re = os.popen(swipe)
     data = '{"code": "0", "msg": "\u64cd\u4f5c\u6210\u529f", "count": 10, "data": [{"id": 1, "name": "Sheet1", "right": "\u6267\u884c"}, {"id": 2,"name": "Sheet2", "right": "\u6267\u884c"}, {"id": 3, "name": "Sheet3", "right": "\u6267\u884c"}]}'
     return HttpResponse(re)
+
 
 def run_all(request):
     run = root + r"\testcase\brun.py "
@@ -79,7 +80,17 @@ def local_file(request):
     param = request.POST.get("param", None)
     file = root + r"\testcase\report" + "\\" + fil
     run = root + r"\tools\local_file.py "
-    swipe = "python " + str(run) +  str(file) + " " + param
+    swipe = "python " + str(run) + str(file) + " " + param
     print(swipe)
     re1 = os.popen(swipe)
     return HttpResponse(re1)
+
+
+def move(request):
+    env = request.POST.get("env", None)
+    script = request.POST.get("script", None)
+    nums = request.POST.get("nums", None)
+    swipe = r"python E:\python\tools\lemon\slide.py -s " + str(script) + " -e " + str(env) + " -n " + str(nums)
+    re = os.popen(swipe)
+    print('swipe', swipe)
+    return HttpResponse(swipe)

@@ -14,6 +14,15 @@
                        class="layui-input" style="width: 80%">
             </div>
         </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">启动APP</label>
+            <div class="layui-input-block">
+                <input type="radio" name="app" value="demo" title="demo" checked="">
+                <input type="radio" name="app" value="official" title="正式服">
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">浏览内容</label>
             <div class="layui-input-inline">
@@ -25,7 +34,7 @@
                 </select>
             </div>
             <div class="layui-input-inline">
-                <select name="nums">
+                <select name="nums" id="nums">
                     <option value="">请选择次数</option>
                     <option value="1">1</option>
                     <option value="5">5</option>
@@ -37,12 +46,11 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">连接设备
-                </button>
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo2">确定</button>
+                <button type="button" class="layui-btn" id="conn_device">连接设备</button>
+                <button type="button" class="layui-btn" id="launch_app">启动APP</button>
+                <button type="button" class="layui-btn" id="move">滑动</button>
             </div>
         </div>
-        <br>
     </form>
 </div>
 {% endblock %}
@@ -55,14 +63,16 @@
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-        //连接设备
-        layui.$('#LAY-component-form-setval').on('click', function () {
+        //启动APP
+        layui.$('#launch_app').on('click', function (data) {
+            var env = $('input[name="app"]:checked ').val();
             $.ajax({
-                url: "/connect_adb/",
-                success: function (data) {
-                    form.val('example', {
-                        "device": data // "name": "value"
-                    });
+                url: "/move/",
+                type: 'POST',
+                data: {"env":env,"script":"launch"},
+                dataType: "json",
+                complete: function () {
+                    layer.msg('处理成功')
                 }
             });
         });
